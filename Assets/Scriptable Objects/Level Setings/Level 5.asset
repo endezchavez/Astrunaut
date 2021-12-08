@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0de8a87a1165b2498653070d90fdcf4, type: 3}
+  m_Name: Level 5
+  m_EditorClassIdentifier: 
+  level: 5
+  levelScore: 1000
+  scrollSpeed: 8
+  backgroundScrollSpeed: 1.5
+  obstacleSpawnTimer: 1.3
+  obstacles:
+  - prefab: {fileID: 6295932245128394569, guid: af87dffa5e5d8764c9be5a4e7e0c6a71, type: 3}
+    numObjectsToPool: 10
+    chanceToSpawn: 50
+  - prefab: {fileID: 5345320273922239133, guid: c1565f7ba67e28d4e96a4729b3a91859, type: 3}
+    numObjectsToPool: 10
+    chanceToSpawn: 50
+  - prefab: {fileID: 2479685489612414835, guid: 7ea4566e99a525c41bdf3b3ec8d0cf45, type: 3}
+    numObjectsToPool: 10
+    chanceToSpawn: 75
+  - prefab: {fileID: 2479685489612414835, guid: ef62497725c2dcd469b279a761407756, type: 3}
+    numObjectsToPool: 10
+    chanceToSpawn: 75
+  - prefab: {fileID: 5345320273922239133, guid: a3c6890e6be88b74382e3a51df58f79c, type: 3}
+    numObjectsToPool: 10
+    chanceToSpawn: 75
+  - prefab: {fileID: 2479685489612414835, guid: cd7236fcb59f0d349babedaa6faf73ae, type: 3}
+    numObjectsToPool: 10
+    chanceToSpawn: 50
+  - prefab: {fileID: 3517629460474795383, guid: 0e9b0761906b85f418c8239fb00bec89, type: 3}
+    numObjectsToPool: 10
+    chanceToSpawn: 75
+  - prefab: {fileID: 3517629460474795383, guid: 134e3135bdff09942b98ae0187b866c4, type: 3}
+    numObjectsToPool: 10
+    chanceToSpawn: 75
+  minCyclesBeforeSpawn: 2
