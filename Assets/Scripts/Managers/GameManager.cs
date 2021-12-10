@@ -210,7 +210,8 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("HighScore", score);
             EventManager.Instance.HighScoreUpdated();
-            PlayGames.Instance.AddScoreToLeaderboard(score);
+            //PlayGames.Instance.AddScoreToLeaderboard(score);
+            CloudOnceServices.Instance.SubmitScoreToLeaderboard(score);
         }
     }
 
