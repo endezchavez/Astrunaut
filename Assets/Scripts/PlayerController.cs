@@ -110,6 +110,8 @@ public class PlayerController : MonoBehaviour
             if (InputManager.Instance.PlayerJumpedThisFrame())
             {
                 Jump();
+                //Remove this!
+               
             }
             if(InputManager.Instance.PlayerSlidThisFrame() && canSlide && IsGrounded())
             {

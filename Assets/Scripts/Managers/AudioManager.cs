@@ -10,6 +10,8 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager Instance { get { return _instance; } }
 
+    public bool playThemeOnAwake;
+
     public Sound[] sounds;
 
     public Sound[] themeSongTempos;
@@ -78,6 +80,11 @@ public class AudioManager : MonoBehaviour
             {
                 Play(sound.source);
             }
+        }
+
+        if (!playThemeOnAwake)
+        {
+            ToggleMusic();
         }
     }
 
