@@ -6632,7 +6632,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1183247604}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2029.3948, y: 810.11865, z: -316.19162}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1392242875}
@@ -9127,9 +9127,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1953111537}
   - component: {fileID: 1953111538}
-  - component: {fileID: 1953111539}
-  - component: {fileID: 1953111540}
-  - component: {fileID: 1953111541}
   m_Layer: 0
   m_Name: Backgrond Generator
   m_TagString: Untagged
@@ -9168,63 +9165,6 @@ MonoBehaviour:
   scrollSpeed: 0.1
   prefab: {fileID: 1884209094905516291, guid: 649e07b7f249a9d4da284de9bfe5fca0, type: 3}
   startPos: {x: -19.2, y: 0, z: 0}
-  numInitialLevelParts: 3
-  levelPartOffset: {x: 19.2, y: 0, z: 0}
---- !u!114 &1953111539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1953111536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0264f0e99bf21f2438e987aaeae01b53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  listenForEvents: 0
-  autoScroll: 0
-  scrollSpeed: 0.1
-  prefab: {fileID: 1884209094905516291, guid: 649e07b7f249a9d4da284de9bfe5fca0, type: 3}
-  startPos: {x: -19.2, y: 14.8, z: 0}
-  numInitialLevelParts: 3
-  levelPartOffset: {x: 19.2, y: 0, z: 0}
---- !u!114 &1953111540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1953111536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0264f0e99bf21f2438e987aaeae01b53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  listenForEvents: 0
-  autoScroll: 0
-  scrollSpeed: 0.1
-  prefab: {fileID: 1884209094905516291, guid: 649e07b7f249a9d4da284de9bfe5fca0, type: 3}
-  startPos: {x: -19.2, y: 29.6, z: 0}
-  numInitialLevelParts: 3
-  levelPartOffset: {x: 19.2, y: 0, z: 0}
---- !u!114 &1953111541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1953111536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0264f0e99bf21f2438e987aaeae01b53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  listenForEvents: 0
-  autoScroll: 0
-  scrollSpeed: 0.1
-  prefab: {fileID: 1884209094905516291, guid: 649e07b7f249a9d4da284de9bfe5fca0, type: 3}
-  startPos: {x: -19.2, y: 44.4, z: 0}
   numInitialLevelParts: 3
   levelPartOffset: {x: 19.2, y: 0, z: 0}
 --- !u!1 &1972283549
