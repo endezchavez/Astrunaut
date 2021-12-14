@@ -86,6 +86,11 @@ public class AudioManager : MonoBehaviour
         {
             ToggleMusic();
         }
+
+        if(PlayerPrefs.GetInt("PlayMusic") == 0)
+        {
+            SetVolumeForAllThemeTempos(0f);
+        }
     }
 
     private void OnEnable()
