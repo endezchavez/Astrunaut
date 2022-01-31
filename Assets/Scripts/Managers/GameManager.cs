@@ -109,11 +109,10 @@ public class GameManager : MonoBehaviour
 
         moonSurfaceGenerator.UpdateScrollSpeed(levelSettings[currentLevel - 1].scrollSpeed);
         backgroundGenerator.UpdateScrollSpeed(levelSettings[currentLevel - 1].backgroundScrollSpeed);
-        //Debug.Log(levelSettings[currentLevel - 1].backgroundScrollSpeed);
 
     }
 
-
+    //Add points to score and increment level if current level max score is surpassed
     public void AddToScore(int points)
     {
         score+= points;
@@ -123,14 +122,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //Increase the current level by 1 and update level settings
     void IncrementLevel()
     {
         currentLevel++;
+        //If the player has reached a new highest level update the highest level stat in player prefs
         if(PlayerPrefs.GetInt("HighestLevel") < currentLevel)
         {
             PlayerPrefs.SetInt("HighestLevel", currentLevel);
             EventManager.Instance.HighestLevelUpdated();
         }
+        //Update the the tempo of the music and update the scroll speed to match the new level settings
         EventManager.Instance.LevelIncremented();
         EventManager.Instance.ThemeTempoChanged();
         moonSurfaceGenerator.UpdateScrollSpeed(levelSettings[currentLevel - 1].scrollSpeed);
@@ -163,6 +165,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    //Respawns the player and resets various stats when the game is restarted
     public void Retry()
     {
         player.Respawn();
@@ -175,18 +178,17 @@ public class GameManager : MonoBehaviour
         StartCoroutine(StartGameWithDelay(0.5f));
     }
 
+    //After a delay start the game again
     IEnumerator StartGameWithDelay(float t)
     {
         yield return new WaitForSeconds(t);
         isPlayerAlive = true;
         isGamePlaying = false;
 
-
         ResetStats();
         ResetTips();
 
         player.ResetInitialJump();
-        isPlayerAlive = true;
         EventManager.Instance.PlayButtonPressed();
         AudioManager.Instance.ResetThemeTempo();
         AudioManager.Instance.PlayTheme();
@@ -204,17 +206,18 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
+    //Check for a new high score and if a new high score is reached update the high score in player prefs and submit the score to the leaderboards
     void CheckForNewHighScore()
     {
         if (PlayerPrefs.GetInt("HighScore") <= score)
         {
             PlayerPrefs.SetInt("HighScore", score);
             EventManager.Instance.HighScoreUpdated();
-            //PlayGames.Instance.AddScoreToLeaderboard(score);
             CloudOnceServices.Instance.SubmitScoreToLeaderboard(score);
         }
     }
 
+    //Update the distance travelled in the player prefs
     void UpdateDistanceTravelled()
     {
         float distanceTravelledForLevel = (Time.time - timeLevelStarted) * levelSettings[currentLevel - 1].scrollSpeed;
@@ -224,7 +227,7 @@ public class GameManager : MonoBehaviour
         EventManager.Instance.DistanceTravelledUpdated();
     }
 
-
+    //calculate the distance travelled, as the player is stationary in the scene we need to calculate distance time since the level started and the current scroll speed
     void CalculateDistanceTravelled()
     {
         timePreviousLevelStarted = timeLevelStarted;
@@ -235,11 +238,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //Add to the total distance slid, this is equal to the slide time * the current scroll speed
     public void AddToSlideDistance(float time)
     {
         distanceSlid += time * levelSettings[currentLevel - 1].scrollSpeed;
     }
 
+    //Update the distance slid in the player prefs
     void UpdateDistanceSlid()
     {
         float totalDistanceSlid = (float)System.Math.Round((double)(PlayerPrefs.GetFloat("DistanceSlid") + distanceSlid), 2);
@@ -247,11 +252,13 @@ public class GameManager : MonoBehaviour
         EventManager.Instance.DistanceSlidUpdated();
     }
 
+    //Add to number of meteors destroyed
     public void AddToMeteorsDestroyed()
     {
         meteorsDestroyed++;
     }
 
+    //Update the number of meteors destroyed in the player prefs
     void UpdateMeteorsDestroyed()
     {
         PlayerPrefs.SetInt("MeteorsDestroyed", PlayerPrefs.GetInt("MeteorsDestroyed") + meteorsDestroyed);

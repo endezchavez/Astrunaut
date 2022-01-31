@@ -24,9 +24,11 @@ public class PanCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EventManager.Instance.onPlayerDeath += Pan;
+        /*EventManager.Instance.onPlayerDeath += Pan;*/
 
         dirToTarget = (endPos.position - transform.position).normalized;
+
+        Pan();
     }
 
     // Update is called once per frame
@@ -37,7 +39,7 @@ public class PanCamera : MonoBehaviour
         {
             if (Vector2.Distance(transform.position, endPos.position) >= 0.1f)
             {
-                transform.position = transform.position + (Vector3.up * Time.deltaTime * speed);
+                transform.position = transform.position + (dirToTarget * Time.deltaTime * speed);
             }
             else
             {

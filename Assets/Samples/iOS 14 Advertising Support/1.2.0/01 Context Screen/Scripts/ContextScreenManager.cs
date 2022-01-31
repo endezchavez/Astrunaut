@@ -1,7 +1,7 @@
 ﻿using Unity.Advertisement.IosSupport.Components;
 using UnityEngine;
 using System;
-using UnityEngine.iOS;
+//using UnityEngine.iOS;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
@@ -21,7 +21,7 @@ namespace Unity.Advertisement.IosSupport.Samples
 
         void Start()
         {
-#if UNITY_IOS
+#if UNITY_IOS && !UNITY_EDITOR
             // check with iOS to see if the user has accepted or declined tracking
             var status = ATTrackingStatusBinding.GetAuthorizationTrackingStatus();
             Version currentVersion = new Version(Device.systemVersion); 
@@ -38,7 +38,7 @@ namespace Unity.Advertisement.IosSupport.Samples
 
             
 #else
-            Debug.Log("Unity iOS Support: App Tracking Transparency status not checked, because the platform is not iOS.");
+            //Debug.Log("Unity iOS Support: App Tracking Transparency status not checked, because the platform is not iOS.");
 #endif
             StartCoroutine(LoadNextScene());
         }
@@ -46,7 +46,7 @@ namespace Unity.Advertisement.IosSupport.Samples
         private IEnumerator LoadNextScene()
         {
 #if UNITY_IOS && !UNITY_EDITOR
-        var status = ATTrackingStatusBinding.GetAuthorizationTrackingStatus();
+            var status = ATTrackingStatusBinding.GetAuthorizationTrackingStatus();
 
         while(status == ATTrackingStatusBinding.AuthorizationTrackingStatus.NOT_DETERMINED)
         {
@@ -54,7 +54,7 @@ namespace Unity.Advertisement.IosSupport.Samples
             yield return null;
         }
 #endif
-
+            //Debug.Log("Loading next Scene");
             SceneManager.LoadScene(1);
             yield return null;
         }

@@ -32,7 +32,6 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        
         if (_instance != null && _instance != this)
         {
             Destroy(this.gameObject);
@@ -42,6 +41,7 @@ public class AudioManager : MonoBehaviour
             _instance = this;
         }
 
+        //Loop over each theme tempo and initialize their values
         foreach(Sound sound in themeSongTempos)
         {
             sound.source = gameObject.AddComponent<AudioSource>();
@@ -54,6 +54,7 @@ public class AudioManager : MonoBehaviour
 
         currentThemeSound = themeSongTempos[0];
 
+        //Disable or enable the theme music based on player prefs
         if(PlayerPrefs.GetInt("PlayMusic") == 1)
         {
             currentThemeSound.source.volume = currentThemeSound.volume;
@@ -67,7 +68,7 @@ public class AudioManager : MonoBehaviour
 
         Play(currentThemeSound.source);
 
-
+        //Loop over each sound effect and initialize their values
         foreach (Sound sound in sounds)
         {
             sound.source = gameObject.AddComponent<AudioSource>();
@@ -106,6 +107,7 @@ public class AudioManager : MonoBehaviour
 
     }
 
+    //Play a sound effect given a name
     public void Play(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
@@ -117,11 +119,13 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 
+    //Play a sound effect given a source
     void Play(AudioSource source)
     {
         source.Play();
     }
 
+    //Play a sound effect with a slightly random pitch given a name
     public void PlayWithRandomPitch(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
@@ -132,12 +136,14 @@ public class AudioManager : MonoBehaviour
         
     }
 
+    //Increase the theme tempo
     void IncreaseThemeTempo()
     {
         currentThemeSound.source.loop = false;
         StartCoroutine(WaitBeforeTempoChange());
     }
 
+    //Waits until the current theme tempo audio clip has finished and then increments the theme tempo
     IEnumerator WaitBeforeTempoChange()
     {
         yield return new WaitWhile(() => currentThemeSound.source.isPlaying);
@@ -152,20 +158,11 @@ public class AudioManager : MonoBehaviour
 
             }
 
-            /*
-            if (isThemePlaying)
-            {
-                currentThemeSound.source.volume = currentThemeSound.volume;
-            }
-            else
-            {
-                currentThemeSound.source.volume = 0;
-            }
-            */
             Play(currentThemeSound.source);
         }
     }
 
+    //Toggles the music on and off
     public void ToggleMusic()
     {
         if (PlayerPrefs.GetInt("PlayMusic") == 1)
@@ -182,6 +179,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    //Loops through all theme tempos and sets their volume to a given value
     void SetVolumeForAllThemeTempos(float volume)
     {
         foreach(Sound s in themeSongTempos)
@@ -191,22 +189,26 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    //Stops the current theme tempo from playing
     public void StopTheme()
     {
         currentThemeSound.source.Stop();
     }
 
+    //Resets the theme temp back to the slowest one
     public void ResetThemeTempo()
     {
         currentTempoIndex = 0;
         currentThemeSound = themeSongTempos[currentTempoIndex];
     }
 
+    //Plays the current theme tempo
     public void PlayTheme()
     {
         Play(currentThemeSound.source);
     }
 
+    //Loops through all theme tempos and sets them to loop
     void ResetAllThemeTempos()
     {
         foreach (Sound s in themeSongTempos)

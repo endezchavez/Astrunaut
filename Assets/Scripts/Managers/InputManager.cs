@@ -1,9 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
+[DefaultExecutionOrder(-1)]
 public class InputManager : MonoBehaviour
 {
+    #region Events
+    public delegate void StartTouch(Vector2 position, float time);
+    public event StartTouch OnStartTouch;
+    public delegate void EndTouch(Vector2 position, float time);
+    public event EndTouch OnEndTouch;
+    #endregion
+
+
+
     private static InputManager _instance;
 
     public static InputManager Instance { get { return _instance; } }
@@ -12,6 +23,11 @@ public class InputManager : MonoBehaviour
     private float swipeThreshold = 1.2f;
 
     InputMaster controls;
+
+    private Camera cam;
+
+    [HideInInspector]
+    public SwipeDetection swipeDetection;
 
     private void Awake()
     {
@@ -27,6 +43,16 @@ public class InputManager : MonoBehaviour
         controls = new InputMaster();
 
         Input.backButtonLeavesApp = true;
+
+        cam = Camera.main;
+
+        swipeDetection = GetComponent<SwipeDetection>();
+    }
+
+    private void Start()
+    {
+        controls.Player.Touch.started += ctx => StartTouchPrimary(ctx);
+        controls.Player.Touch.canceled += ctx => EndTouchPrimary(ctx);
     }
 
     public bool PlayerShotThisFrame()
@@ -46,7 +72,7 @@ public class InputManager : MonoBehaviour
                 return false;
             }
             Vector2 delta = controls.Player.Swipe.ReadValue<Vector2>();
-            return delta.y < -swipeThreshold;
+            return delta.y < -Screen.height / 500;
         }
         return false;
     }
@@ -65,12 +91,34 @@ public class InputManager : MonoBehaviour
                 return false;
             }
             Vector2 delta = controls.Player.Swipe.ReadValue<Vector2>();
-            return delta.y > swipeThreshold;
+            return delta.y > Screen.height / 500;
         }
         return false;
 
     }
 
+    private void StartTouchPrimary(InputAction.CallbackContext context)
+    {
+        if(OnStartTouch != null)
+        {
+
+            OnStartTouch(ScreenToWorld(cam, controls.Player.TouchPos.ReadValue<Vector2>()), (float)context.startTime);
+        }
+    }
+
+    private void EndTouchPrimary(InputAction.CallbackContext context)
+    {
+        if (OnEndTouch != null)
+        {
+            OnEndTouch(ScreenToWorld(cam, controls.Player.TouchPos.ReadValue<Vector2>()), (float)context.time);
+        }
+    }
+
+    Vector2 ScreenToWorld(Camera camera, Vector3 position)
+    {
+        position.z = camera.nearClipPlane;
+        return camera.ScreenToWorldPoint(position);
+    }
 
     private void OnEnable()
     {

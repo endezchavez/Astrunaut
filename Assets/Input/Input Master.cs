@@ -36,11 +36,11 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""Touch"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""661f32b1-04c4-4997-8ffe-bfa940cbb3a8"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """"
+                    ""interactions"": ""Press""
                 },
                 {
                     ""name"": ""Shoot"",
@@ -60,7 +60,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""TouchPos"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""2df541d7-e4c1-40f1-a5d8-07e2792fa12b"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
